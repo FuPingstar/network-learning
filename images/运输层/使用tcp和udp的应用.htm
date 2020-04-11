@@ -1,0 +1,3748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/u013777351/article/details/49226101"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+        <meta name="csdn-baidu-search"  content='{"autorun":true,"install":true,"keyword":"传输层TCP和UDP的区别分析与应用场景【转载】 - 小鱼的专栏"}'>
+    
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>传输层TCP和UDP的区别分析与应用场景【转载】 - 小鱼的专栏 - CSDN博客</title>
+
+        
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-0395476d0b.min.css">
+            
+            <script type="application/ld+json">{"@context":"https:\/\/ziyuan.baidu.com\/contexts\/cambrian.jsonld","@id":"https:\/\/blog.csdn.net\/u013777351\/article\/details\/49226101","appid":"1563894916825412","title":"\u4f20\u8f93\u5c42TCP\u548cUDP\u7684\u533a\u522b\u5206\u6790\u4e0e\u5e94\u7528\u573a\u666f\u3010\u8f6c\u8f7d\u3011 - \u5c0f\u9c7c\u7684\u4e13\u680f","images":["https:\/\/img-blog.csdn.net\/20151018100130736","https:\/\/img-blog.csdn.net\/20151018103115179","https:\/\/img-blog.csdn.net\/20151018103233366"],"pubDate":"2019-04-10T16:09:32"}</script>
+        
+          <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-9b39979775.min.css">
+        <script type="text/javascript">
+        var username = "u013777351";
+        var userPermission = false;
+        var blog_address = "https://blog.csdn.net/u013777351";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "";
+        var currentUserPermission = false;
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/u013777351/article/details/49226101"
+        var blogUrl = "https://blog.csdn.net/";
+        //页面皮肤样式
+        var curSkin = "skin3-template";
+        // 第四范式所需数据
+        var articleTitles = "传输层TCP和UDP的区别分析与应用场景【转载】 - 小鱼的专栏";
+        var articleID = "49226101";
+        
+        var nickName = "life_爱水的鱼";
+        var isCorporate = false;
+        var subDomainBlogUrl = "https://blog.csdn.net/"
+        var digg_base_url = "https://blog.csdn.net/u013777351/phoenix/comment";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+    <script src="//g.csdnimg.cn/fixed-sidebar/1.1.3/fixed-sidebar.js" type="text/javascript"></script>
+    <!-- 新版上报 -->
+          <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/track-c86a2663d0.js" /></script>
+        <!-- 新版上报end -->
+
+    <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<!-- nodata 第三栏接口无数据时样式不变 -->
+<body class="nodata " > 
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div id="kp_box_476" data-pid="476" data-track-view='{"mod":"kp_popu_476-884","con":",,"}' data-track-click='{"mod":"kp_popu_476-884","con":",,"}'><script src="//csdnimg.cn/public/common/indexSuperise/1.0.3/indexSuperise.js?20190103190825"></script>
+<script>
+ window.csdn.indexSuperise({
+      smallMoveImg: '//img-ads.csdn.net/2019/201903221114185850.gif',
+      bigMoveImg: '//img-ads.csdn.net/2019/201903221116225723.jpg',
+     link:'//bss.csdn.net/m/topic/python_developer?utm_source=bkhd',
+boxStyle:140,
+trackSuperId:476,
+smallMove:'notMove',  
+trackSId:884
+    });
+</script></div><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript">
+	// 容错处理
+	var NEWS_FEED = function(){}
+</script>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/copyright/1.0.3/copyright.js"></script>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/chart-3456820cac.css" />
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix" id="mainBox">
+			<div class="recommend-right">
+  <ul class="recommend-fixed-box">
+    
+  </ul>
+</div>	
+    <main>
+        <div class="blog-content-box">
+	<div class="article-header-box">
+		<div class="article-header">
+			<div class="article-title-box">
+				<span class="article-type type-2 float-left">转</span>				<h1 class="title-article">传输层TCP和UDP的区别分析与应用场景【转载】</h1>
+			</div>
+			<div class="article-info-box">
+				<div class="article-bar-top">
+																				<span class="time">2015年10月18日 10:37:36</span>
+					<a class="follow-nickName" href="https://me.csdn.net/u013777351" target="_blank">life_爱水的鱼</a>
+						<span class="read-count">阅读数：17687</span>
+						
+														<span class="tags-box artic-tag-box">
+								<span class="label">标签：</span>
+																<a data-track-click='{"mod":"popu_626","con":"tcp"}' data-track-view='{"mod":"popu_626","con":"tcp"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=tcp&t=blog" target="_blank">tcp																<a data-track-click='{"mod":"popu_626","con":"udp"}' data-track-view='{"mod":"popu_626","con":"udp"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=udp&t=blog" target="_blank">udp																<a data-track-click='{"mod":"popu_626","con":"计算机网络"}' data-track-view='{"mod":"popu_626","con":"计算机网络"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=计算机网络&t=blog" target="_blank">计算机网络																<a data-track-click='{"mod":"popu_626","con":"传输层"}' data-track-view='{"mod":"popu_626","con":"传输层"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=传输层&t=blog" target="_blank">传输层																<a data-track-click='{"mod":"popu_626","con":"应用"}' data-track-view='{"mod":"popu_626","con":"应用"}' class="tag-link" href="https://so.csdn.net/so/search/s.do?q=应用&t=blog" target="_blank">应用																</a>
+							</span>
+																					<div class="tags-box space">
+								<span class="label">个人分类：</span>
+																<a class="tag-link" href="https://blog.csdn.net/u013777351/article/category/5795233"  target="_blank">计算机网络																<a class="tag-link" href="https://blog.csdn.net/u013777351/article/category/5821093"  target="_blank">面试杂谈																</a>
+							</div>
+																								</div>
+				<div class="operating">
+									</div>
+			</div>
+		</div>
+	</div>
+	<article class="baidu_pl">
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+								<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-f57960eb32.css" />
+								            <div id="content_views" class="markdown_views prism-atom-one-dark">
+							<!-- flowchart 箭头图标 勿删 -->
+							<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg>
+							<h1 id="基本概念">基本概念：</h1>
+
+
+
+<h2 id="1-面向报文">1： 面向报文</h2>
+
+<p>面向报文的传输方式是应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小。UDP对应用层交下来的报文，既不合并，也不拆分，而是保留这些报文的边界。这也就是说，应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。</p>
+
+
+
+<h2 id="2-面向字节流">2： 面向字节流</h2>
+
+<p>面向字节流的话，虽然应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序看成是一连串的无结构的字节流。TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送。如果应用程序一次只发送一个字节，TCP也可以等待积累有足够多的字节后再构成报文段发送出去。</p>
+
+
+
+<h1 id="下图是tcp和udp协议的一些应用">下图是TCP和UDP协议的一些应用。</h1>
+
+<p><img src="https://img-blog.csdn.net/20151018100130736" alt="TCP/UDP常见应用" title=""></p>
+
+
+
+<h1 id="下图是tcp和udp协议的比较">下图是TCP和UDP协议的比较。</h1>
+
+<p><img src="https://img-blog.csdn.net/20151018103115179" alt="TCP/UDP比较" title=""></p>
+
+
+
+<h1 id="这里再详细说一下面向连接和面向无连接的区别">这里再详细说一下面向连接和面向无连接的区别：</h1>
+
+<pre><code>面向连接举例：两个人之间通过电话进行通信;
+面向无连接举例：邮政服务，用户把信函放在邮件中期待邮政处理流程来传递邮政包裹。
+    显然，不可达代表不可靠。
+</code></pre>
+
+<h1 id="tcpudp编程模型">TCP/UDP编程模型</h1>
+
+<p>从程序实现的角度来看，可以用下图来进行描述。 <br>
+<img src="https://img-blog.csdn.net/20151018103233366" alt="TCP/UDP编程模型" title=""></p>
+
+<p>从上图也能清晰的看出，TCP通信需要服务器端侦听listen、接收客户端连接请求accept，等待客户端connect建立连接后才能进行数据包的收发（recv/send）工作。而UDP则服务器和客户端的概念不明显，服务器端即接收端需要绑定端口，等待客户端的数据的到来。后续便可以进行数据的收发（recvfrom/sendto）工作。 <br>
+在前面讲解UDP时，提到了UDP保留了报文的边界，下面我们来谈谈TCP和UDP中报文的边界问题。在默认的阻塞模式下，TCP无边界，UDP有边界。 <br>
+   对于TCP协议，客户端连续发送数据，只要服务端的这个函数的缓冲区足够大，会一次性接收过来，即客户端是分好几次发过来，是有边界的，而服务端却一次性接收过来，所以证明是无边界的； <br>
+   而对于UDP协议，客户端连续发送数据，即使服务端的这个函数的缓冲区足够大，也只会一次一次的接收，发送多少次接收多少次，即客户端分几次发送过来，服务端就必须按几次接收，从而证明，这种UDP的通讯模式是有边界的。</p>
+
+
+
+<h1 id="tcpudp的优缺点">TCP/UDP的优缺点：</h1>
+
+
+
+<h2 id="tcp的优点">TCP的优点：</h2>
+
+<pre><code>可靠，稳定
+TCP的可靠体现在TCP在传递数据之前，会有三次握手来建立连接，而且在数据传递时，有确认、窗口、重传、拥塞控制机制，在数据传完后，还会断开连接用来节约系统资源。
+</code></pre>
+
+
+
+<h2 id="tcp的缺点">TCP的缺点：</h2>
+
+<p>慢，效率低，占用系统资源高，易被攻击 <br>
+    TCP在传递数据之前，要先建连接，这会消耗时间，而且在数据传递时，确认机制、重传机制、拥塞控制机制等都会消耗大量的时间，而且要在每台设备上维护所有的传输连接，事实上，每个连接都会占用系统的CPU、内存等硬件资源。 <br>
+    而且，因为TCP有确认机制、三次握手机制，这些也导致TCP容易被人利用，实现DOS、DDOS、CC等攻击。</p>
+
+<h2 id="udp的优点">UDP的优点：</h2>
+
+<p>快，比TCP稍安全 <br>
+ UDP没有TCP的握手、确认、窗口、重传、拥塞控制等机制，UDP是一个无状态的传输协议，所以它在传递数据时非常快。没有TCP的这些机制，UDP较TCP被攻击者利用的漏洞就要少一些。但UDP也是无法避免攻击的，比如：UDP Flood攻击……</p>
+
+<h2 id="udp的缺点">UDP的缺点：</h2>
+
+<p>不可靠，不稳定 <br>
+ 因为UDP没有TCP那些可靠的机制，在数据传递时，如果网络质量不好，就会很容易丢包。</p>
+
+<h1 id="tcpudp应用场景">TCP/UDP应用场景：</h1>
+
+<p>基于上面的优缺点，那么：</p>
+
+
+
+<h2 id="什么时候应该使用tcp">什么时候应该使用TCP：</h2>
+
+<p>当对网络通讯质量有要求的时候，比如：整个数据要准确无误的传递给对方，这往往用于一些要求可靠的应用，比如HTTP、HTTPS、FTP等传输文件的协议，POP、SMTP等邮件传输的协议。 <br>
+在日常生活中，常见使用TCP协议的应用如下：</p>
+
+<pre><code>浏览器，用的HTTP
+FlashFXP，用的FTP
+Outlook，用的POP、SMTP
+Putty，用的Telnet、SSH
+QQ文件传输
+…………
+</code></pre>
+
+
+
+<h2 id="那么什么时候应该使用udp">那么什么时候应该使用UDP：</h2>
+
+<p>当对网络通讯质量要求不高的时候，要求网络通讯速度能尽量的快，这时就可以使用UDP。 <br>
+比如，日常生活中，常见使用UDP协议的应用如下：</p>
+
+<pre><code>QQ语音
+QQ视频
+TFTP
+……
+</code></pre>
+
+<p>转载网站： <br>
+<a href="http://blog.csdn.net/ce123_zhouwei/article/details/8976006" rel="nofollow">http://blog.csdn.net/ce123_zhouwei/article/details/8976006</a> <br>
+<a href="http://zhidao.baidu.com/link?url=lMFVNDmMnTe_c3a66Zj0tXaqiIp_VO_mmT2_3fdfgx-GJNnpsUOroV_-uDEZ9FgoPcSU-CAM8ZPAdgW3iGyKiK" rel="nofollow">http://zhidao.baidu.com/link?url=lMFVNDmMnTe_c3a66Zj0tXaqiIp_VO_mmT2_3fdfgx-GJNnpsUOroV_-uDEZ9FgoPcSU-CAM8ZPAdgW3iGyKiK</a></p>            </div>
+						<link href="https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-258a4616f7.css" rel="stylesheet">
+                      </div>
+	</article>
+</div>
+  <div class="hide-article-box hide-article-pos text-center">
+    <div class="border"></div>
+        <a class="btn article-footer-btn" id="btn-readmore" data-track-view='{"mod":"popu_376","con":",https://blog.csdn.net/u013777351/article/details/49226101,"}' data-track-click='{"mod":"popu_376","con":",https://blog.csdn.net/u013777351/article/details/49226101,"}'>阅读更多</a>
+        <a class="btn article-footer-btn article-footer-bookmark-btn" >
+      <svg class="icon no-active hover-hide" aria-hidden="true">
+        <use xlink:href="#csdnc-bookmark"></use>
+      </svg>
+      <span>收藏</span>
+    </a>
+    <div class="btn article-footer-btn  bds_weixin article-footer-share-btn" data-cmd="weixin" title="分享">
+      <svg class="icon no-active hover-hide" aria-hidden="true">
+        <use xlink:href="#csdnc-share"></use>
+      </svg>
+      <span>分享</span>
+      <div class="bdsharebuttonbox">
+        <a href="#"class="bds_weixin clear-share-style-article-footer" data-cmd="weixin" title="分享"></a>
+      </div>
+    </div>
+    
+  </div>
+  <script>
+  (function(){
+    function collection(){
+      if (currentUserName) {
+        var markObj = {};
+            markObj.imgUrl ='https://csdnimg.cn/release/phoenix/static_blog/images/appqr.png';
+        var markPrompt = (new window.csdn.publicPrompt).init(markObj);
+        var maeked = '您已经收藏过';
+        if (!$(this).hasClass("liked")) {
+          $.ajax({
+            url: 'https://my.csdn.net/my/favorite/do_add/2',
+            dataType: 'json',
+            type: 'POST',
+            xhrFields: {
+              withCredentials: true
+            },
+            data: {
+              title: articleTit,
+              url: 'https://blog.csdn.net/u013777351/article/details/49226101',
+              share: 1,
+              map_name: ''
+            },
+            success: function(data) {
+              
+              if (data.succ == 1) {
+                $('.btn-bookmark').addClass("liked");
+                $('.article-footer-bookmark-btn').addClass("liked").children('span').text('已收藏');
+                markPrompt.show({})
+                // alert('收藏成功,可以在个人中心查看我的收藏');
+              } else {
+                if (data.msg === "您已经收藏过") {
+                  $('.btn-bookmark').addClass("liked");
+                  $('.article-footer-bookmark-btn').addClass("liked").children('span').text('已收藏');
+                  markPrompt.show({
+                    titleStr: maeked
+                  })
+                }else{
+                  alert(data.msg);
+                  
+                }
+              }
+            }
+          });
+        } else {
+          markPrompt.show({
+            titleStr: maeked
+          })
+        }
+      } else {
+        window.csdn.loginBox.show();
+      }
+    }
+    function permissionCheck(dom){
+      var returnData = false;
+      switch (true) {
+        case currentUserPermission && userPermission:
+          clearReadMoreBtn(dom)
+          returnData = true;
+          break;
+        case userPermission:
+          dom.text('VIP阅读');
+          returnData = false;
+          break;
+        default:
+          
+      }
+      return returnData;
+    }
+    window.csdn = window.csdn ? window.csdn : {};
+    window.csdn.articleCollection = collection;
+    function clearReadMoreBtn(dom) {
+      if(userPermission && !(dom instanceof jQuery)) {
+        window.open('https://mall.csdn.net/vip_code?utm_source=brv')
+        return false;
+      }
+      dom = dom instanceof jQuery ? dom : $(this);
+      $("div.article_content").removeAttr("style");
+      dom.parent().remove();
+    }
+    function setArticleH(btnReadmore,posi){
+      var winH = $(window).height();
+      var articleBox = $("div.article_content");
+      var artH = articleBox.height();
+      if(artH > winH*posi){
+        articleBox.css({
+          'height':winH*posi+'px',
+          'overflow':'hidden'
+        })
+        btnReadmore.click(clearReadMoreBtn)
+      }else{
+        btnReadmore.parent().remove()
+      }
+    }
+    var btnReadmore = $("#btn-readmore");
+    $('.article-footer-bookmark-btn').click(window.csdn.articleCollection)
+    if(btnReadmore.length>0){
+      if (permissionCheck(btnReadmore)) {
+        return false;
+      }
+      if(currentUserName){
+        setArticleH(btnReadmore,3);
+      }else{
+        setArticleH(btnReadmore,1.2);
+      }
+    }else{
+      $('.hide-article-box').addClass('hide-article-style');
+    }
+  })()
+</script>
+<script>
+		$(".MathJax").remove();
+		if($('div.markdown_views pre.prettyprint code.hljs').length > 0 ){
+				$('div.markdown_views')[0].className = 'markdown_views';
+		}
+</script>
+        <div id="dmp_ad_58"><div id="kp_box_58" data-pid="58" data-track-view='{"mod":"kp_popu_58-402","con":",,"}' data-track-click='{"mod":"kp_popu_58-402","con":",,"}'><div style="width:100%;background:#fff;border:3px solid #fff;">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<div id="three_ad1" class="mediav_ad" ></div>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 100,
+                showid : 'ztvJV8',
+                placeholderId: "three_ad1",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 0,
+                    imageWidth: 90,
+                    imageHeight: 68,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft YaHei',
+                    paddingTop : 20,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 20,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script>
+</div></div></div>        <a id="commentBox"></a>
+<div class="comment-box">
+	
+	<div class="comment-edit-box d-flex">
+		<a id="commentsedit"></a>
+		<div class="user-img">
+			<a href="javascript:void(0);" target="_blank">
+				<img class="show_loginbox" src="//g.csdnimg.cn/static/user-img/anonymous-User-img.png">
+			</a>
+		</div>
+		<form id="commentform">
+			<input type="hidden" id="comment_replyId">
+			<textarea class="comment-content" name="comment_content" id="comment_content" placeholder="想对作者说点什么"></textarea>
+			<div class="opt-box"> <!-- d-flex -->
+				<div id="ubbtools" class="add_code">
+					<a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+				</div>
+				<input type="hidden" id="comment_replyId" name="comment_replyId">
+				<input type="hidden" id="article_id" name="article_id" value="49226101">
+				<input type="hidden" id="comment_userId" name="comment_userId" value="">
+				<input type="hidden" id="commentId" name="commentId" value="">
+				<div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+				<div class="dropdown" id="myDrap">
+					<a class="dropdown-face d-flex align-items-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<div class="txt-selected text-truncate">添加代码片</div>
+					<svg class="icon d-block" aria-hidden="true">
+						<use xlink:href="#csdnc-triangledown"></use>
+					</svg>
+					</a>
+					<ul class="dropdown-menu" id="commentCode" aria-labelledby="drop4">
+						<li><a data-code="html">HTML/XML</a></li>
+						<li><a data-code="objc">objective-c</a></li>
+						<li><a data-code="ruby">Ruby</a></li>
+						<li><a data-code="php">PHP</a></li>
+						<li><a data-code="csharp">C</a></li>
+						<li><a data-code="cpp">C++</a></li>
+						<li><a data-code="javascript">JavaScript</a></li>
+						<li><a data-code="python">Python</a></li>
+						<li><a data-code="java">Java</a></li>
+						<li><a data-code="css">CSS</a></li>
+						<li><a data-code="sql">SQL</a></li>
+						<li><a data-code="plain">其它</a></li>
+					</ul>
+				</div>  
+				<div class="right-box">
+					<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+					<input type="submit" class="btn btn-sm btn-red btn-comment" value="发表评论">
+				</div>
+			</div>
+		</form>
+	</div>
+
+		<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>
+        <div class="recommend-box">
+            		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Li_Ning_/article/details/52117463,BlogCommendFromThirdService_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Li_Ning_/article/details/52117463" target="_blank" title="TCP和UDP的最完整的区别">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>和<em>UDP</em>的最完整的<em>区别</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							23万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Li_Ning_/article/details/52117463" target="_blank" title="TCP和UDP的最完整的区别">
+							<span class="desc oneline">TCP和UDP两种协议的比较汇总</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Li_Ning_">来自：	<span class="blog_title"> Li_Ning_的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/leewccc/article/details/70225610,BlogCommendFromThirdService_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/leewccc/article/details/70225610" target="_blank" title="TCP 与 UDP 的区别及应用场景">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em> 与 <em>UDP</em> 的<em>区别</em>及<em>应用场景</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-18</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/leewccc/article/details/70225610" target="_blank" title="TCP 与 UDP 的区别及应用场景">
+							<span class="desc oneline">TCP与UDP的区别及应用场景概述　　两者都是通信协议，TCP、UDP是传输层协议，但他们的通信机制与应用场景不同，下面来阐述两者的区别以及它们的应用场景。...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/leewccc">来自：	<span class="blog_title"> leewccc的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qzcsu/article/details/72861891,BlogCommendFromThirdService_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qzcsu/article/details/72861891" target="_blank" title="TCP的三次握手与四次挥手（详解+动图）">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>的三次握手与四次挥手（详解+动图）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							12万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qzcsu/article/details/72861891" target="_blank" title="TCP的三次握手与四次挥手（详解+动图）">
+							<span class="desc oneline">背景描述通过上一篇中网络模型中的IP层的介绍，我们知道网络层，可以实现两个主机之间的通信。但是这并不具体，因为，真正进行通信的实体是在主机中的进程，是一个主机中的一个进程与另外一个主机中的一个进程在交...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qzcsu">来自：	<span class="blog_title"> qzcsu的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_59" data-pid="59" data-track-view='{"mod":"kp_popu_59-517","con":",,"}' data-track-click='{"mod":"kp_popu_59-517","con":",,"}'><div id="three_ad1" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 52,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad1",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 52,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/hswkcg/article/details/80649111,BlogCommendFromThirdService_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hswkcg/article/details/80649111" target="_blank" title="TCP和UDP的区别小结和应用场合">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>和<em>UDP</em>的<em>区别</em>小结和应用场合				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							779</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hswkcg/article/details/80649111" target="_blank" title="TCP和UDP的区别小结和应用场合">
+							<span class="desc oneline">1.TCP与UDP基本区别 1.基于连接与无连接 2.TCP要求系统资源较多，UDP较少；  3.UDP程序结构较简单  4.流模式（TCP）与数据报模式(UDP);  5.TCP保证数据正确性，UD...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hswkcg">来自：	<span class="blog_title"> hswkcg的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yxw_android/article/details/49358487,BlogCommendFromThirdService_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yxw_android/article/details/49358487" target="_blank" title="什么情况下适合用UDP协议，什么情况下适合用TCP协议？">
+				<h4 class="text-truncate oneline">
+						什么情况下适合用<em>UDP</em>协议，什么情况下适合用<em>TCP</em>协议？				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-23</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2588</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yxw_android/article/details/49358487" target="_blank" title="什么情况下适合用UDP协议，什么情况下适合用TCP协议？">
+							<span class="desc oneline">总的来说TCP协议提供可靠的服务，UDP协议提供高效率的服务。高可靠性的TCP服务提供面向连接的服务，主要用于一次传输大量报文的情形，如文件传输，远程登录等；高效率的UDP协议提供无连接的数据报服务，...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yxw_android">来自：	<span class="blog_title"> wilson的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wkkzmm126/article/details/27298161,BlogCommendFromBaidu_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wkkzmm126/article/details/27298161" target="_blank" title="tcp udp优缺点及使用场景">
+				<h4 class="text-truncate oneline">
+						<em>tcp</em> <em>udp</em>优缺点及使用场景				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-28</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							7913</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wkkzmm126/article/details/27298161" target="_blank" title="tcp udp优缺点及使用场景">
+							<span class="desc oneline">Tcp的优点：可靠，wend</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wkkzmm126">来自：	<span class="blog_title"> 小河的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/timtian008/article/details/71598217,BlogCommendFromBaidu_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/timtian008/article/details/71598217" target="_blank" title="TCP与 UDP区别及使用场景总结">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>与 <em>UDP</em><em>区别</em>及使用场景总结				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4074</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/timtian008/article/details/71598217" target="_blank" title="TCP与 UDP区别及使用场景总结">
+							<span class="desc oneline">UDP与TCP区别点：UDP协议：发短信只管发生，不确认对方是否接收到每个数据大小限制在64k之内因为无需链接，因此是不可靠协议速度快应用场景(当对网络通讯质量有要求的时候，比如：整个数据要准确无误的...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/timtian008">来自：	<span class="blog_title"> timtian008的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u010273362/article/details/77648953,BlogCommendFromBaidu_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010273362/article/details/77648953" target="_blank" title="7.TCP和UDP的区别和应用场景">
+				<h4 class="text-truncate oneline">
+						7.<em>TCP</em>和<em>UDP</em>的<em>区别</em>和<em>应用场景</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-28</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1081</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010273362/article/details/77648953" target="_blank" title="7.TCP和UDP的区别和应用场景">
+							<span class="desc oneline">TCPUDPTCP与UDP基本区别 1.基于连接与无连接 2.TCP要求系统资源较多，UDP较少；  3.UDP程序结构较简单  4.流模式（TCP）与数据报模式(UDP);  5.TCP保证数据正确...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u010273362">来自：	<span class="blog_title"> u010273362的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_60" data-pid="60" data-track-view='{"mod":"kp_popu_60-894","con":"8038129893852611257,https://edu.csdn.net/course/detail/7653,"}' data-track-click='{"mod":"kp_popu_60-894","con":"8038129893852611257,https://edu.csdn.net/course/detail/7653,"}'><link rel="stylesheet" href="https://www.csdn.net/company/css/edu-recommend-1.0.1.css">
+  <div class="edu-ad-list">
+    <div class="recommend-item-box type_blog clearfix">
+      <div class="content">
+        <a href="https://edu.csdn.net/course/detail/7653?utm_source=baidutj" target="_blank" title="网络安全技术（CCNA-HCNA）">
+          <h4 class="text-truncate oneline">网络安全技术（CCNA-HCNA）</h4>
+        </a>
+        <p class="content">
+          <a href="https://edu.csdn.net/course/detail/7653?utm_source=baidutj" target="_blank" title="网络安全技术（CCNA-HCNA）">
+            <span class="desc oneline">通俗易懂的讲解互联网概述，数据传输的封装解封过程，OSI七层参考模型详解，TCP/IP模型详解，TCP,UDP,IP报文格式的分析，交换机的工作原理，掌握rip、ospf、vlan、stp、vtp、多层交换、网关冗余、地址转换、wlan、访问控制列表、华为交换机和路由器的相关配置</span>
+          </a>
+          <span class="blog_title_box oneline ">
+            <span class="type-show type-show-edu type-show-after">学院</span>
+            讲师： <span class="blog_title"> 穆未名</span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/lisa890608/article/details/8231707,BlogCommendFromBaidu_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lisa890608/article/details/8231707" target="_blank" title="tcp udp协议应用场景">
+				<h4 class="text-truncate oneline">
+						<em>tcp</em> <em>udp</em>协议<em>应用场景</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-27</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2440</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lisa890608/article/details/8231707" target="_blank" title="tcp udp协议应用场景">
+							<span class="desc oneline">首先还是把协议特性说一下，明白了特性自然知道应用场合了，嘿嘿！两种协议都是传输层协议，为应用层提供信息载体。TCP协议是基于连接的可靠协议，有流量控制和差错控制，也正因为有可靠性的保证和控制手段，所以...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/lisa890608">来自：	<span class="blog_title"> lisa890608的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/STFPHP/article/details/53193205,BlogCommendESEnWordWeight_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/STFPHP/article/details/53193205" target="_blank" title="浅谈TCP和UDP的区别">
+				<h4 class="text-truncate oneline">
+						浅谈<em>TCP</em>和<em>UDP</em>的<em>区别</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1968</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/STFPHP/article/details/53193205" target="_blank" title="浅谈TCP和UDP的区别">
+							<span class="desc oneline">作为运输层中两个主要的协议，TCP和UDP都能向应用层提供通信服务，然而它们提供的服务差别还是很大的。1、TCP协议是面向连接的。也就是说，应用程序在使用TCP协议之前，必须先建立起一个TCP连接，之...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/STFPHP">来自：	<span class="blog_title"> yyyiue的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+          <div class="recommend-item-box blog-expert-recommend-box">
+				<div class="d-flex">
+					<div class="blog-expert-recommend">
+						<div class="blog-expert">
+							<div class="blog-expert-flexbox"></div>
+						</div>
+					</div>
+				</div>
+      </div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u014682691/article/details/52061646,BlogCommendESEnWordWeight_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u014682691/article/details/52061646" target="_blank" title="TCP和UDP区别通俗理解">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>和<em>UDP</em><em>区别</em>通俗理解				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u014682691/article/details/52061646" target="_blank" title="TCP和UDP区别通俗理解">
+							<span class="desc oneline">TCP协议与UDP协议的区别   首先咱们弄清楚，TCP协议和UCP协议与TCP/IP协议的联系，很多人犯糊涂了，一直都是说TCP/IP协议与UDP协议的区别，我觉得这是没有从本质上弄清楚网络通信！T...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u014682691">来自：	<span class="blog_title"> u014682691的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/kingov/article/details/77155671,BlogCommendFromBaidu_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/kingov/article/details/77155671" target="_blank" title="详解TCP的3次握手和4次挥手">
+				<h4 class="text-truncate oneline">
+						详解<em>TCP</em>的3次握手和4次挥手				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							9193</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/kingov/article/details/77155671" target="_blank" title="详解TCP的3次握手和4次挥手">
+							<span class="desc oneline">为什么有3次握手每当建立一个TCP/IP连接的时候都要经历3次握手，这是为了保证建立一个可靠的连接。什么是3次握手上图中的三次挥手说的是，客户端向服务器发请求，服务器接收请求，服务器接收请求之后发送一...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/kingov">来自：	<span class="blog_title"> kingov</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yipanbo/article/details/62888871,BlogCommendFromBaidu_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yipanbo/article/details/62888871" target="_blank" title="TCP协议中的三次握手和四次挥手(图解)">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>协议中的三次握手和四次挥手(图解)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-17</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1841</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yipanbo/article/details/62888871" target="_blank" title="TCP协议中的三次握手和四次挥手(图解)">
+							<span class="desc oneline">原地址：http://blog.csdn.net/whuslei/article/details/6667471建立TCP需要三次握手才能建立，而断开连接则需要四次握手。整个过程如下图所示：先来看看如...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yipanbo">来自：	<span class="blog_title"> yipanbo的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_61" data-pid="61" data-track-view='{"mod":"kp_popu_61-557","con":",,"}' data-track-click='{"mod":"kp_popu_61-557","con":",,"}'><div id="three_ad13" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad13",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/hacker00011000/article/details/52319111,BlogCommendFromBaidu_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hacker00011000/article/details/52319111" target="_blank" title="TCP三次握手和四次挥手以及缺陷(详细)">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>三次握手和四次挥手以及缺陷(详细)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hacker00011000/article/details/52319111" target="_blank" title="TCP三次握手和四次挥手以及缺陷(详细)">
+							<span class="desc oneline">建立TCP需要三次握手才能建立，而断开连接则需要四次握手。整个过程如下图所示：1、TCP连接建立——三次握手几个概念：【1】seq：序号，占4个字节，范围[0,4284967296],由于TCP是面向...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hacker00011000">来自：	<span class="blog_title"> hacker00011000的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_36466762/article/details/78352651,BlogCommendFromBaidu_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36466762/article/details/78352651" target="_blank" title="TCP协议与UDP协议的区别">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>协议与<em>UDP</em>协议的<em>区别</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1866</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36466762/article/details/78352651" target="_blank" title="TCP协议与UDP协议的区别">
+							<span class="desc oneline">TCP协议和UCP协议与TCP/IP协议的联系，一直都是说TCP/IP协议与UDP协议的区别。所以我想解释一点的是TCP/IP协议是一个协议簇。里面包括很多协议的。UDP只是其中的一个。之所以命名为T...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_36466762">来自：	<span class="blog_title"> qq_36466762的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/weixin_35804181/article/details/52584398,BlogCommendFromBaidu_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_35804181/article/details/52584398" target="_blank" title="TCP与UDP特性与区别">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>与<em>UDP</em>特性与<em>区别</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-19</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3412</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_35804181/article/details/52584398" target="_blank" title="TCP与UDP特性与区别">
+							<span class="desc oneline">1.TCP特性1.1.TCP的优点可靠，稳定。TCP的可靠体现在TCP在传递数据之前，会有三次握手来建立连接，而且在数据传递时，有确认、窗口、重传、拥塞控制机制，在数据传完后，还会断开连接用来节约系统...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/weixin_35804181">来自：	<span class="blog_title"> sugao的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ljheee/article/details/50823050,BlogCommendFromGuangxin_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ljheee/article/details/50823050" target="_blank" title="UDP是什么、及UDP和TCP的区别？">
+				<h4 class="text-truncate oneline">
+						<em>UDP</em>是什么、及<em>UDP</em>和<em>TCP</em>的<em>区别</em>？				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-07</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							7007</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ljheee/article/details/50823050" target="_blank" title="UDP是什么、及UDP和TCP的区别？">
+							<span class="desc oneline">UDP方式传输数据发送时：先把数据放到报文，写到缓冲区字节数组再传送。接收时：从缓冲器数组读取，打包到报文，UDP的使用在选择使用协议的时候，选择UDP必须要谨慎。在网络质量令人十分不满意的环境下，U...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ljheee">来自：	<span class="blog_title"> ljheee的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_34501940/article/details/51067309,BlogCommendFromGuangxin_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_34501940/article/details/51067309" target="_blank" title="TCP协议的学习	（一）TCP服务特点">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>协议的学习	（一）<em>TCP</em>服务特点				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-05</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4916</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_34501940/article/details/51067309" target="_blank" title="TCP协议的学习	（一）TCP服务特点">
+							<span class="desc oneline">TCP的服务特点：1.面向连接2.字节流3.可靠性</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_34501940">来自：	<span class="blog_title"> 唯一的信仰</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_62" data-pid="62" data-track-view='{"mod":"kp_popu_62-556","con":",,"}' data-track-click='{"mod":"kp_popu_62-556","con":",,"}'><div id="three_ad18" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad18",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u011904605/article/details/53013093,BlogCommendFromGuangxin_18"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011904605/article/details/53013093" target="_blank" title="TCP的流量控制  TCP与UDP的区别">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>的流量控制  <em>TCP</em>与<em>UDP</em>的<em>区别</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-02</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2439</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011904605/article/details/53013093" target="_blank" title="TCP的流量控制  TCP与UDP的区别">
+							<span class="desc oneline">http://www.cnblogs.com/Jessy/p/3536163.htmlhttp://www.cnblogs.com/Jessy/p/3536163.htmlhttp://www.cnb...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u011904605">来自：	<span class="blog_title"> u011904605的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/AlbertFly/article/details/51324511,BlogCommendFromGuangxin_19"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/AlbertFly/article/details/51324511" target="_blank" title="UDP连接和TCP连接的异同">
+				<h4 class="text-truncate oneline">
+						<em>UDP</em>连接和<em>TCP</em>连接的异同				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-05</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3295</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/AlbertFly/article/details/51324511" target="_blank" title="UDP连接和TCP连接的异同">
+							<span class="desc oneline">简单的说TCP与UDP的区别是有无连接状态。TCP是有连接状态的，而UDP没有，所以TCP是一种比较安全的通讯协议，而UDP则比较方便TCP127.0.0.1:10260.0.0.0:0LISTENI...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/AlbertFly">来自：	<span class="blog_title"> Flyer的后花园</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/xu1105775448/article/details/80944076,BlogCommendFromQuerySearch_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xu1105775448/article/details/80944076" target="_blank" title="传输层--TCP和UDP的对比">
+				<h4 class="text-truncate oneline">
+						<em>传输层</em>--<em>TCP</em>和<em>UDP</em>的对比				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							391</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xu1105775448/article/details/80944076" target="_blank" title="传输层--TCP和UDP的对比">
+							<span class="desc oneline">TCP和UDP协议是传输层非常重要的两个协议，这两个协议在数据传输从起着非常重要的作用，前面两篇文章讲解了各自的特点，本文来讲解一下这两个协议有什么区别。从各自的特点来看1.TCP是面向连接的，而UD...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xu1105775448">来自：	<span class="blog_title"> 我的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/dangzhangjing97/article/details/80991965,BlogCommendFromQuerySearch_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/dangzhangjing97/article/details/80991965" target="_blank" title="传输层之UDP头部解析、UDP特点&amp;TCP头部解析、TCP特点">
+				<h4 class="text-truncate oneline">
+						<em>传输层</em>之<em>UDP</em>头部解析、<em>UDP</em>特点&amp;<em>TCP</em>头部解析、<em>TCP</em>特点				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							487</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/dangzhangjing97/article/details/80991965" target="_blank" title="传输层之UDP头部解析、UDP特点&amp;TCP头部解析、TCP特点">
+							<span class="desc oneline">UDP一、UDP是什么？UDP是UserDatagramProtocol（用户数据报协议）二、UDP的特点1.UDP是无连接的，即就是UDP在发送数据之前不需要建立连接；2.UDP是尽自己的最大努力来...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/dangzhangjing97">来自：	<span class="blog_title"> dangzhangjing97的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/sweetgum2012/article/details/51176948,BlogCommendFromQuerySearch_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sweetgum2012/article/details/51176948" target="_blank" title="TCP/IP(三)：传输层TCP与UDP">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>/IP(三)：<em>传输层</em><em>TCP</em>与<em>UDP</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-18</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6770</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sweetgum2012/article/details/51176948" target="_blank" title="TCP/IP(三)：传输层TCP与UDP">
+							<span class="desc oneline">TCP协议概述TCP协议和UDP协议处于同一层：传输层，但是两者之间有很大的区别，TCP协议具有以下特点：TCP提供可靠的数据传输服务，TCP是面向连接的，即数据在通信之间要先建立连接，结束通信时要释...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/sweetgum2012">来自：	<span class="blog_title"> sweetgum2012的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_63" data-pid="63" data-track-view='{"mod":"kp_popu_63-555","con":",,"}' data-track-click='{"mod":"kp_popu_63-555","con":",,"}'><div id="three_ad23" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad23",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u011730649/article/details/44306517,BlogCommendFromQuerySearch_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011730649/article/details/44306517" target="_blank" title="传输层协议TCP与UDP的详细阐述与比较">
+				<h4 class="text-truncate oneline">
+						<em>传输层</em>协议<em>TCP</em>与<em>UDP</em>的详细阐述与比较				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3227</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011730649/article/details/44306517" target="_blank" title="传输层协议TCP与UDP的详细阐述与比较">
+							<span class="desc oneline">TCP/IP是普遍使用的网络互连标准协议，可在不同环境和不同节点之间进行彼此通信，是连入Internet的所有计算机在网络上进行各种信息交换和传输所必须采用的协议，也是WindowsNT、Window...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u011730649">来自：	<span class="blog_title"> zyxNobita专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/weixin_40099554/article/details/80641884,BlogCommendFromQuerySearch_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_40099554/article/details/80641884" target="_blank" title="TCP与UDP区分以及优缺点">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>与<em>UDP</em>区分以及优缺点				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1429</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_40099554/article/details/80641884" target="_blank" title="TCP与UDP区分以及优缺点">
+							<span class="desc oneline">在TCP/IP中能实现传输层功能的,具有代表性的协议是TCP和UDP.TCP:      TCP是面向连接的,可靠的流协议.流就是指不间断的数据结构,你可以把它想象成排水管道中的水流,当应用程序采用T...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/weixin_40099554">来自：	<span class="blog_title"> 李俊标的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/weixin_42385626/article/details/81983594,BlogCommendFromThirdService_25"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_42385626/article/details/81983594" target="_blank" title="TCP,UDP通信使用场景及区别比较">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>,<em>UDP</em>通信使用场景及<em>区别</em>比较				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-23</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							791</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_42385626/article/details/81983594" target="_blank" title="TCP,UDP通信使用场景及区别比较">
+							<span class="desc oneline">在文章《基于java的TCP通信》我们实现了基于TCP传输协议的通信，但是在物联网设备数据传输过程中《Arduino+ESP8266上传数据到服务器》，《Arduino+ESP8266接收服务器信息》...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/weixin_42385626">来自：	<span class="blog_title"> weixin_42385626的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_36523667/article/details/78842377,BlogCommendFromThirdService_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36523667/article/details/78842377" target="_blank" title="Retrofit2结合RxJava2简单处理嵌套请求（flatMap）">
+				<h4 class="text-truncate oneline">
+						Retrofit2结合RxJava2简单处理嵌套请求（flatMap）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-19</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2834</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36523667/article/details/78842377" target="_blank" title="Retrofit2结合RxJava2简单处理嵌套请求（flatMap）">
+							<span class="desc oneline">gradlecompile'io.reactivex:rxjava:1.2.0'compile'io.reactivex:rxandroid:1.2.1'compile'com.squareup.re...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_36523667">来自：	<span class="blog_title"> qq_36523667的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/taotongning/article/details/81450159,BlogCommendFromThirdService_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/taotongning/article/details/81450159" target="_blank" title="TCP和UDP协议的特点和应用场景">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>和<em>UDP</em>协议的特点和<em>应用场景</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							189</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/taotongning/article/details/81450159" target="_blank" title="TCP和UDP协议的特点和应用场景">
+							<span class="desc oneline">网络中的计算机通信无外乎有以下两种情况：1.要发送的内容多，需要将发送的内容分成多个数据包发送。（TCP协议 丢包后会重传，考虑可靠传输 ）2.要发送的内容少，一个数据包就能发送全部内容。（UDP协议...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/taotongning">来自：	<span class="blog_title"> taotongning的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_64" data-pid="64" data-track-view='{"mod":"kp_popu_64-81","con":",,"}' data-track-click='{"mod":"kp_popu_64-81","con":",,"}'><div id="three_ad28" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad28",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/hhthwx/article/details/80144582,BlogCommendFromThirdService_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hhthwx/article/details/80144582" target="_blank" title="TCP UDP 的区别和具体应用场景">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em> <em>UDP</em> 的<em>区别</em>和具体<em>应用场景</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2052</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hhthwx/article/details/80144582" target="_blank" title="TCP UDP 的区别和具体应用场景">
+							<span class="desc oneline">TCP和UDP两者都是通信协议，TCP和UDP都是传输层协议，但是他们的通信机制和应用场景不同。TCPTCP（TransmissionControlProtocol）又叫传输控制协议，TCP是面向连接...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hhthwx">来自：	<span class="blog_title"> hhthwx的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/leikun153/article/details/82557210,BlogCommendFromBaidu_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/leikun153/article/details/82557210" target="_blank" title="tcp协议和udp协议的使用场景">
+				<h4 class="text-truncate oneline">
+						<em>tcp</em>协议和<em>udp</em>协议的使用场景				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-09</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							443</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/leikun153/article/details/82557210" target="_blank" title="tcp协议和udp协议的使用场景">
+							<span class="desc oneline">一：什么是TCP（TransmissionControlProtocol，传输控制协议）tcp是面向连接的协议，也就是说，在收发数据前，必须和对方建立可靠的连接。一个TCP连接必须要经过三次“对话”才...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/leikun153">来自：	<span class="blog_title"> leikun153的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_35408439/article/details/73250532,BlogCommendFromBaidu_30"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_35408439/article/details/73250532" target="_blank" title="Socket通信——TCP、UDP区别总结、使用场景">
+				<h4 class="text-truncate oneline">
+						Socket通信——<em>TCP</em>、<em>UDP</em><em>区别</em>总结、使用场景				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1582</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_35408439/article/details/73250532" target="_blank" title="Socket通信——TCP、UDP区别总结、使用场景">
+							<span class="desc oneline">TCP1.TCP是面向连接的2.每条TCP连接只能用于两个断点，一对一3.TCP提供可靠交付的服务：连接传输数据、无差错、不丢失、不重复、并且按序到达4.TCP提供全双工通信5.面向字节流。TCP根据...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_35408439">来自：	<span class="blog_title"> qq_35408439的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/songshiMVP1/article/details/51893273,BlogCommendFromBaidu_31"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/songshiMVP1/article/details/51893273" target="_blank" title="UDP，TCP，SCTP使用场合">
+				<h4 class="text-truncate oneline">
+						<em>UDP</em>，<em>TCP</em>，SCTP使用场合				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-13</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1259</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/songshiMVP1/article/details/51893273" target="_blank" title="UDP，TCP，SCTP使用场合">
+							<span class="desc oneline">1、何时使用UDP代替TCP？（1）UDP的优势：        A.UDP支持广播和多播。如果应用程序使用广播或者多播，那就必须使用UDP。        B.UDP没有连接的建立与拆除。UDP只需...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/songshiMVP1">来自：	<span class="blog_title"> 松狮</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_33591903/article/details/82119138,BlogCommendFromBaidu_32"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_33591903/article/details/82119138" target="_blank" title="【计算机网络】TCP与UDP的区别及适用场景">
+				<h4 class="text-truncate oneline">
+						【计算机网络】<em>TCP</em>与<em>UDP</em>的<em>区别</em>及适用场景				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-27</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_33591903/article/details/82119138" target="_blank" title="【计算机网络】TCP与UDP的区别及适用场景">
+							<span class="desc oneline">                 TCP与UDP的区别及适用场景TCP（TransmissionControlProtocol，传输控制协议）与UDP（UserDatagramProtocol，用户数...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_33591903">来自：	<span class="blog_title"> 阳阳的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_65" data-pid="65" data-track-view='{"mod":"kp_popu_65-84","con":",,"}' data-track-click='{"mod":"kp_popu_65-84","con":",,"}'><div id="three_ad33" class="mediav_ad" ></div>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad33",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yanxiaolx/article/details/52123628,BlogCommendFromBaidu_33"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yanxiaolx/article/details/52123628" target="_blank" title="TCP三次握手和四次挥手全过程及为什么要三次握手解答">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>三次握手和四次挥手全过程及为什么要三次握手解答				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yanxiaolx/article/details/52123628" target="_blank" title="TCP三次握手和四次挥手全过程及为什么要三次握手解答">
+							<span class="desc oneline">TCP三次握手和四次挥手的全过程   TCP是主机对主机层的传输控制协议，提供可靠的连接服务，采用三次握手确认建立一个连接:位码即tcp标志位,有8种表示:SYN(synchronous建立联机)AC...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yanxiaolx">来自：	<span class="blog_title"> 岩枭的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/xulu_258/article/details/51146489,BlogCommendFromBaidu_34"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xulu_258/article/details/51146489" target="_blank" title="tcp三次握手四次挥手（及原因）详解">
+				<h4 class="text-truncate oneline">
+						<em>tcp</em>三次握手四次挥手（及原因）详解				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-13</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xulu_258/article/details/51146489" target="_blank" title="tcp三次握手四次挥手（及原因）详解">
+							<span class="desc oneline">TCP（TransmissionControlProtocol，传输控制协议）是面向连接的协议，也就是说在收发数据之前，必须先和对方建立连接，一个TCP连接必须要经过三次“对话”才能建立起来，其中的过...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xulu_258">来自：	<span class="blog_title"> xulu_258的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/peterwanghao/article/details/7900811,BlogCommendFromBaidu_35"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/peterwanghao/article/details/7900811" target="_blank" title="基于IPSec的VPN技术原理与实现">
+				<h4 class="text-truncate oneline">
+						基于IPSec的VPN技术原理与实现				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-23</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/peterwanghao/article/details/7900811" target="_blank" title="基于IPSec的VPN技术原理与实现">
+							<span class="desc oneline">基于IPSec的VPN技术原理与实现摘要：本文描述了VPN技术的基本原理以及IPSec规范，在此基础上介绍了VPN技术的实现方法和几种典型应用方案。最后，作者对VPN技术的推广与应用提出了自己的看法。...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/peterwanghao">来自：	<span class="blog_title"> 王浩的技术博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/romandion/article/details/2772334,BlogCommendFromBaidu_36"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/romandion/article/details/2772334" target="_blank" title="高可用高性能系统（九）UDP的应用">
+				<h4 class="text-truncate oneline">
+						高可用高性能系统（九）<em>UDP</em>的应用				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-05</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1404</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/romandion/article/details/2772334" target="_blank" title="高可用高性能系统（九）UDP的应用">
+							<span class="desc oneline">   UDP对实现高可能高性能系统有啥好处呢？其实UDP的好处是间接的。我们知道UDP和TCP不同的是，UDP不保证可靠性，他只管发，不管收没收到。也就是说一个报文，他只会发一次而已。而TCP就必须靠...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/romandion">来自：	<span class="blog_title"> romandion的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/m47838704/article/details/79548193,BlogCommendFromBaidu_37"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/m47838704/article/details/79548193" target="_blank" title="Java引用分类和缓存实现">
+				<h4 class="text-truncate oneline">
+						Java引用分类和缓存实现				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-13</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							295</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/m47838704/article/details/79548193" target="_blank" title="Java引用分类和缓存实现">
+							<span class="desc oneline">在JVM中将对象的引用分为了四类：强引用：在GC阶段不会被垃圾回收软引用：在GC阶段可能会被回收弱引用：在GC阶段肯定会被回收虚引用：不会影响对象的GC，当对象被GC的时候会得到一个通知如果用JVM做...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/m47838704">来自：	<span class="blog_title"> m47838704的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_66" data-pid="66" data-track-view='{"mod":"kp_popu_66-881","con":",,"}' data-track-click='{"mod":"kp_popu_66-881","con":",,"}'><script src="https://nbrecsys.4paradigm.com/resource/cus/csdn/sdk-csdn-render.js"></script>
+<div
+  id="_4paradigm_T38_render"
+  class="_paradigm_T_ads_render _4paradigm_box recommend-item-box clearfix"
+></div>
+<script>
+  //  渲染T38  传入 渲染位置的id和渲染位置的标记
+  p4CSDNRender_T("_4paradigm_T38_render", "T38");
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ruhailiu126/article/details/79400143,BlogCommendFromQuerySearch_38"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ruhailiu126/article/details/79400143" target="_blank" title="使用wireshark分析TCP及UDP协议">
+				<h4 class="text-truncate oneline">
+						使用wireshark<em>分析</em><em>TCP</em>及<em>UDP</em>协议				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-28</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							7487</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ruhailiu126/article/details/79400143" target="_blank" title="使用wireshark分析TCP及UDP协议">
+							<span class="desc oneline">   最近在工作中涉及到使用一种4G的DTU模块与服务器后台通信。因在部分场景下需要在消息中传输文件（通过base64），因此考虑到以下两个问题：    1）TCP连接是否保证多次send（发送）的数...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ruhailiu126">来自：	<span class="blog_title"> 萧别离（RenH）</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/weixin_40417029/article/details/81538459,BlogCommendFromQuerySearch_39"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_40417029/article/details/81538459" target="_blank" title="认识传输层（UDP与TCP）">
+				<h4 class="text-truncate oneline">
+						认识<em>传输层</em>（<em>UDP</em>与<em>TCP</em>）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							226</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_40417029/article/details/81538459" target="_blank" title="认识传输层（UDP与TCP）">
+							<span class="desc oneline">传输层主要负责数据能够从发送端发送到接收端。要正确传输就要明确发送端和接收端，这时候IP地址和端口号一起就可以确定一端了。那么他们是怎么唯一标识的呢？1端口号（port）  端口号唯一标识一个主机上进...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/weixin_40417029">来自：	<span class="blog_title"> weixin_40417029的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/amazingrace/article/details/4739051,BlogCommendFromQuerySearch_40"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/amazingrace/article/details/4739051" target="_blank" title="SCTP和TCP/UDP相比，有什么不同">
+				<h4 class="text-truncate oneline">
+						SCTP和<em>TCP</em>/<em>UDP</em>相比，有什么不同				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-28</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3666</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/amazingrace/article/details/4739051" target="_blank" title="SCTP和TCP/UDP相比，有什么不同">
+							<span class="desc oneline">在SCTP（StreamControlTransmissionProtocol，流控制传输协议）制定以前，在IP网上传输七号信令使用的是UDP、TCP协议。UDP是一种无连接的传输协议，无法满足七号信...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/amazingrace">来自：	<span class="blog_title"> On my way</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ght886/article/details/80055488,BlogCommendFromQuerySearch_41"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ght886/article/details/80055488" target="_blank" title="OSI 传输层（TCP、UDP协议）">
+				<h4 class="text-truncate oneline">
+						OSI <em>传输层</em>（<em>TCP</em>、<em>UDP</em>协议）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-23</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							446</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ght886/article/details/80055488" target="_blank" title="OSI 传输层（TCP、UDP协议）">
+							<span class="desc oneline">　　　　　　　　　　　　　运输层概括　　　　　　　　　　　　　TCP协议16位源端口号：16位的源端口中包含初始化通信的端口。源端口和源IP地址的作用是标识报文的返回地址。16位目的端口号：16位的目...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ght886">来自：	<span class="blog_title"> Kevin's  life</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/sinat_38992528/article/details/79410232,BlogCommendFromQuerySearch_42"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sinat_38992528/article/details/79410232" target="_blank" title="udp tcp http  websocket之间的关系和使用场景">
+				<h4 class="text-truncate oneline">
+						<em>udp</em> <em>tcp</em> http  websocket之间的关系和使用场景				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-01</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1264</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sinat_38992528/article/details/79410232" target="_blank" title="udp tcp http  websocket之间的关系和使用场景">
+							<span class="desc oneline">转自：http://blog.csdn.net/sinat_31057219/article/details/72872359https://www.jianshu.com/p/42260a2575f...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/sinat_38992528">来自：	<span class="blog_title"> sinat_38992528的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_67" data-pid="67" data-track-view='{"mod":"kp_popu_67-882","con":",,"}' data-track-click='{"mod":"kp_popu_67-882","con":",,"}'><script src="https://nbrecsys.4paradigm.com/resource/cus/csdn/sdk-csdn-render.js"></script>
+<div
+  id="_4paradigm_T43_render"
+  class="_paradigm_T_ads_render _4paradigm_box recommend-item-box clearfix"
+></div>
+<script>
+  //  渲染T43  传入 渲染位置的id和渲染位置的标记
+  p4CSDNRender_T("_4paradigm_T43_render", "T43");
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/peter_teng/article/details/52775960,BlogCommendFromThirdService_43"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/peter_teng/article/details/52775960" target="_blank" title="TCP三次握手与四次挥手最简洁易懂的解释">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>三次握手与四次挥手最简洁易懂的解释				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							8169</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/peter_teng/article/details/52775960" target="_blank" title="TCP三次握手与四次挥手最简洁易懂的解释">
+							<span class="desc oneline">建立TCP需要三次握手才能建立，而断开连接则需要四次握手。整个过程如下图所示：建立连接的过程：TCP连接是通过三次握手进行初始化的。三次握手的目的是同步连接双方的序列号和确认号并交换TCP窗口大小信息...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/peter_teng">来自：	<span class="blog_title"> peter_teng的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/omnispace/article/details/52701752,BlogCommendFromThirdService_44"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/omnispace/article/details/52701752" target="_blank" title="理论经典：TCP协议的3次握手与4次挥手过程详解">
+				<h4 class="text-truncate oneline">
+						理论经典：<em>TCP</em>协议的3次握手与4次挥手过程详解				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/omnispace/article/details/52701752" target="_blank" title="理论经典：TCP协议的3次握手与4次挥手过程详解">
+							<span class="desc oneline">摘要:本文将分别讲解经典的TCP协议建立连接（所谓的“3次握手”）和断开连接（所谓的“4次挥手”）的过程。1、前言尽管TCP和UDP都使用相同的网络层（IP），TCP却向应用层提供与UDP完全不同的服...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/omnispace">来自：	<span class="blog_title"> omnispace的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ZWE7616175/article/details/80432486,BlogCommendFromThirdService_45"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ZWE7616175/article/details/80432486" target="_blank" title="TCP三次握手及四次挥手详解及常见面试题">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>三次握手及四次挥手详解及常见面试题				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-24</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ZWE7616175/article/details/80432486" target="_blank" title="TCP三次握手及四次挥手详解及常见面试题">
+							<span class="desc oneline">TCP的报头：1.源端口号：表示发送端端口号，字段长为16位。2.目标端口号：表示接收端口号，字段长为16位。3.序列号：表示发送数据的位置，字段长为32位。每发送一次数据，就累加一次该数据字节数的大...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ZWE7616175">来自：	<span class="blog_title"> ZWE7616175的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/lizhentao0707/article/details/79959041,BlogCommendFromBaidu_46"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lizhentao0707/article/details/79959041" target="_blank" title="TCP和UDP的区别和应用场景">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>和<em>UDP</em>的<em>区别</em>和<em>应用场景</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							210</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lizhentao0707/article/details/79959041" target="_blank" title="TCP和UDP的区别和应用场景">
+							<span class="desc oneline">TCP和UDP的区别（1）TCP面向连接，UDP无连接；（2）TCP提供可靠传输，UDP尽最大努力交付；（3）UDP的传输效率比UDP快；（4）TCP连接是点到点、一对一的，UDP支持一对一、一对多和...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/lizhentao0707">来自：	<span class="blog_title"> lizhentao0707的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Jacoob1024/article/details/81633004,BlogCommendFromBaidu_47"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Jacoob1024/article/details/81633004" target="_blank" title="TCP与UDP的区别与应用场景">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>与<em>UDP</em>的<em>区别</em>与<em>应用场景</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-13</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							181</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Jacoob1024/article/details/81633004" target="_blank" title="TCP与UDP的区别与应用场景">
+							<span class="desc oneline">TCP和UDP两者都是通信协议，TCP和UDP都是传输层协议，但是他们的通信机制和应用场景不同。TCPTCP（TransmissionControlProtocol）又叫传输控制协议，TCP是面向连接...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Jacoob1024">来自：	<span class="blog_title"> Jacoob1024的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_68" data-pid="68" data-track-view='{"mod":"kp_popu_68-883","con":",,"}' data-track-click='{"mod":"kp_popu_68-883","con":",,"}'><!-- T48 位置 -->
+<script src="https://nbrecsys.4paradigm.com/resource/cus/csdn/sdk-csdn-render.js"></script>
+<div
+  id="_4paradigm_T48_render"
+  class="_paradigm_T_ads_render _4paradigm_box recommend-item-box clearfix"
+></div>
+<script>
+  //  渲染T48  传入 渲染位置的id和渲染位置的标记
+  p4CSDNRender_T("_4paradigm_T48_render", "T48");
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/xiaobangkuaipao/article/details/76793702,BlogCommendFromBaidu_48"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xiaobangkuaipao/article/details/76793702" target="_blank" title="TCP和UDP的区别和优缺点">
+				<h4 class="text-truncate oneline">
+						<em>TCP</em>和<em>UDP</em>的<em>区别</em>和优缺点				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							13万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xiaobangkuaipao/article/details/76793702" target="_blank" title="TCP和UDP的区别和优缺点">
+							<span class="desc oneline">1、TCP与UDP区别总结：1、TCP面向连接（如打电话要先拨号建立连接）;UDP是无连接的，即发送数据之前不需要建立连接2、TCP提供可靠的服务。也就是说，通过TCP连接传送的数据，无差错，不丢失，...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xiaobangkuaipao">来自：	<span class="blog_title"> xiaobangkuaipao的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_18425655/article/details/51955674,BlogCommendFromBaidu_49"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_18425655/article/details/51955674" target="_blank" title="面试题：TCP协议与UDP协议的区别">
+				<h4 class="text-truncate oneline">
+						面试题：<em>TCP</em>协议与<em>UDP</em>协议的<em>区别</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-19</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							9760</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_18425655/article/details/51955674" target="_blank" title="面试题：TCP协议与UDP协议的区别">
+							<span class="desc oneline">本文转载自：点击打开链接TCP（TransmissionControlProtocol，传输控制协议）是面向连接的协议，也就是说，在收发数据前，必须和对方建立可靠的连接。一个TCP连接必须要经过三次“...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_18425655">来自：	<span class="blog_title"> iCodeWoods</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/hunanchenxingyu/article/details/50677852,BlogCommendHotData_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hunanchenxingyu/article/details/50677852" target="_blank" title="使用QEMU创建虚拟机">
+				<h4 class="text-truncate oneline">
+						使用QEMU创建虚拟机				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-17</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hunanchenxingyu/article/details/50677852" target="_blank" title="使用QEMU创建虚拟机">
+							<span class="desc oneline">QEMU是一款高效而实用的模拟器及虚拟机监管器，本系列博客试图从最基本的安装使用开始，逐层深入地介绍QEMU。本篇文章从QEMU最基础的知识讲起，介绍了QEMU的安装使用、系统模拟的基本原理以及如何利...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hunanchenxingyu">来自：	<span class="blog_title"> hunanchenxingyu的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/diandianxiyu/article/details/53068012,BlogCommendHotData_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/diandianxiyu/article/details/53068012" target="_blank" title="【小程序】微信小程序开发实践">
+				<h4 class="text-truncate oneline">
+						【小程序】微信小程序开发实践				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-07</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							25万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/diandianxiyu/article/details/53068012" target="_blank" title="【小程序】微信小程序开发实践">
+							<span class="desc oneline">帐号相关流程注册范围
+企业
+政府
+媒体
+其他组织换句话讲就是不让个人开发者注册。 :)填写企业信息不能使用和之前的公众号账户相同的邮箱,也就是说小程序是和微信公众号一个层级的。填写公司机构信息,对公账...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/diandianxiyu">来自：	<span class="blog_title"> 小雨同学的技术博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yenange/article/details/12198829,BlogCommendHotData_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yenange/article/details/12198829" target="_blank" title="ODAC (odp.net)  从开发到部署">
+				<h4 class="text-truncate oneline">
+						ODAC (odp.net)  从开发到部署				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-30</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yenange/article/details/12198829" target="_blank" title="ODAC (odp.net)  从开发到部署">
+							<span class="desc oneline">test</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yenange">来自：	<span class="blog_title"> 我想我是海 冬天的大海 心情随风轻摆</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/pongba/article/details/1659952,BlogCommendHotData_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/pongba/article/details/1659952" target="_blank" title="《C++0x漫谈》系列之：多线程内存模型">
+				<h4 class="text-truncate oneline">
+						《C++0x漫谈》系列之：多线程内存模型				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-20</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/pongba/article/details/1659952" target="_blank" title="《C++0x漫谈》系列之：多线程内存模型">
+							<span class="desc oneline">《C++0x漫谈》系列之：多线程内存模型 By 刘未鹏(pongba)刘言|C++的罗浮宫(http://blog.csdn.net/pongba)  《C++0x漫谈》系列导言 这个系列其实早就想写...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/pongba">来自：	<span class="blog_title"> 刘未鹏|C++的罗浮宫</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_36892341/article/details/73918672,BlogCommendHotData_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36892341/article/details/73918672" target="_blank" title="linux上安装Docker(非常简单的安装方法)">
+				<h4 class="text-truncate oneline">
+						linux上安装Docker(非常简单的安装方法)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							20万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36892341/article/details/73918672" target="_blank" title="linux上安装Docker(非常简单的安装方法)">
+							<span class="desc oneline">最近比较有空，大四出来实习几个月了，作为实习狗的我，被叫去研究Docker了，汗汗！
+
+Docker的三大核心概念：镜像、容器、仓库
+镜像：类似虚拟机的镜像、用俗话说就是安装文件。
+容器：类似一个轻量...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_36892341">来自：	<span class="blog_title"> 我走小路的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/weixin_41051367/article/details/78977185,BlogCommendHotData_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_41051367/article/details/78977185" target="_blank" title="联想小新air pro 13的 win10和ubuntu17.10双系统安装，彻底解决找不到磁盘问题。">
+				<h4 class="text-truncate oneline">
+						联想小新air pro 13的 win10和ubuntu17.10双系统安装，彻底解决找不到磁盘问题。				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-05</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6905</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_41051367/article/details/78977185" target="_blank" title="联想小新air pro 13的 win10和ubuntu17.10双系统安装，彻底解决找不到磁盘问题。">
+							<span class="desc oneline">我的是航海王定制版，17年初入手。安装成功时间：2018年1月4日。
+
+题外话：触摸板的鼠标键坏了，联系客服修的周期太长而我要一直用，就没有去修。
+
+想装双系统，网上搜索，然后看到了这篇文章：http...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/weixin_41051367">来自：	<span class="blog_title"> weixin_41051367的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yaoxiaochuang/article/details/53117379,BlogCommendHotData_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yaoxiaochuang/article/details/53117379" target="_blank" title="地理空间数据格式——GeoJSON">
+				<h4 class="text-truncate oneline">
+						地理空间数据格式——GeoJSON				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yaoxiaochuang/article/details/53117379" target="_blank" title="地理空间数据格式——GeoJSON">
+							<span class="desc oneline">GeoJSON地理空间信息数据交换格式</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yaoxiaochuang">来自：	<span class="blog_title"> 探索地理之源 分享GIS价值</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/roguesir/article/details/77104246,BlogCommendHotData_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/roguesir/article/details/77104246" target="_blank" title="人脸检测工具face_recognition的安装与应用">
+				<h4 class="text-truncate oneline">
+						人脸检测工具face_recognition的安装与应用				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/roguesir/article/details/77104246" target="_blank" title="人脸检测工具face_recognition的安装与应用">
+							<span class="desc oneline">人脸检测工具face_recognition的安装与应用</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/roguesir">来自：	<span class="blog_title"> roguesir的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yu_xiaofei/article/details/13287899,BlogCommendHotData_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yu_xiaofei/article/details/13287899" target="_blank" title="SNMP协议详解&lt;二&gt;">
+				<h4 class="text-truncate oneline">
+						SNMP协议详解&lt;二&gt;				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							12万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yu_xiaofei/article/details/13287899" target="_blank" title="SNMP协议详解&lt;二&gt;">
+							<span class="desc oneline">上一篇文章讲解了SNMP的基本架构，本篇文章将重点分析SNMP报文，并对不同版本（SNMPv1、v2c、v3）进行区别！
+
+四、SNMP协议数据单元
+
+在SNMP管理中，管理站（NMS）和代理（Age...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yu_xiaofei">来自：	<span class="blog_title"> 假装在纽约</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u010687392/article/details/47121729,BlogCommendHotData_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010687392/article/details/47121729" target="_blank" title="插件化开发—动态加载技术加载已安装和未安装的apk">
+				<h4 class="text-truncate oneline">
+						插件化开发—动态加载技术加载已安装和未安装的apk				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010687392/article/details/47121729" target="_blank" title="插件化开发—动态加载技术加载已安装和未安装的apk">
+							<span class="desc oneline">首先引入一个概念，动态加载技术是什么？为什么要引入动态加载？它有什么好处呢？首先要明白这几个问题，我们先从
+应用程序入手，大家都知道在Android App中，一个应用程序dex文件的方法数最大不能超...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u010687392">来自：	<span class="blog_title"> 【博客地址迁移到】：https://zhengxiaoyong.com</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wuchengzeng/article/details/50037611,BlogCommendHotData_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wuchengzeng/article/details/50037611" target="_blank" title="jquery/js实现一个网页同时调用多个倒计时(最新的)">
+				<h4 class="text-truncate oneline">
+						jquery/js实现一个网页同时调用多个倒计时(最新的)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							44万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wuchengzeng/article/details/50037611" target="_blank" title="jquery/js实现一个网页同时调用多个倒计时(最新的)">
+							<span class="desc oneline">jquery/js实现一个网页同时调用多个倒计时(最新的)
+
+最近需要网页添加多个倒计时. 查阅网络,基本上都是千遍一律的不好用. 自己按需写了个.希望对大家有用. 有用请赞一个哦!
+
+
+
+//js
+...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wuchengzeng">来自：	<span class="blog_title"> Websites</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u011860731/article/details/48733073,BlogCommendHotData_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011860731/article/details/48733073" target="_blank" title="ThreadLocal的设计理念与作用">
+				<h4 class="text-truncate oneline">
+						ThreadLocal的设计理念与作用				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011860731/article/details/48733073" target="_blank" title="ThreadLocal的设计理念与作用">
+							<span class="desc oneline">Java中的ThreadLocal类允许我们创建只能被同一个线程读写的变量。因此，如果一段代码含有一个ThreadLocal变量的引用，即使两个线程同时执行这段代码，它们也无法访问到对方的Thread...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u011860731">来自：	<span class="blog_title"> u011860731的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq574857122/article/details/16361033,BlogCommendHotData_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq574857122/article/details/16361033" target="_blank" title="强连通分量及缩点tarjan算法解析">
+				<h4 class="text-truncate oneline">
+						强连通分量及缩点tarjan算法解析				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							57万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq574857122/article/details/16361033" target="_blank" title="强连通分量及缩点tarjan算法解析">
+							<span class="desc oneline">强连通分量：
+简言之 就是找环（每条边只走一次，两两可达）
+孤立的一个点也是一个连通分量 
+ 
+使用tarjan算法 在嵌套的多个环中优先得到最大环( 最小环就是每个孤立点）
+ 
+定义：
+int Ti...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq574857122">来自：	<span class="blog_title"> 九野的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Smile_qiqi/article/details/32724931,BlogCommendHotData_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Smile_qiqi/article/details/32724931" target="_blank" title="魔兽争霸3冰封王座1.24e 多开联机补丁 信息发布与收集点">
+				<h4 class="text-truncate oneline">
+						魔兽争霸3冰封王座1.24e 多开联机补丁 信息发布与收集点				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-20</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Smile_qiqi/article/details/32724931" target="_blank" title="魔兽争霸3冰封王座1.24e 多开联机补丁 信息发布与收集点">
+							<span class="desc oneline">畅所欲言！</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Smile_qiqi">来自：	<span class="blog_title"> Smile_qiqi的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/silentpebble/article/details/41279285,BlogCommendHotData_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/silentpebble/article/details/41279285" target="_blank" title="centos 查看命令源码">
+				<h4 class="text-truncate oneline">
+						centos 查看命令源码				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-19</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							8万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/silentpebble/article/details/41279285" target="_blank" title="centos 查看命令源码">
+							<span class="desc oneline"># yum install yum-utils
+
+
+设置源:
+[base-src]
+name=CentOS-5.4 - Base src -
+baseurl=http://vault.ce...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/silentpebble">来自：	<span class="blog_title"> linux/unix</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/jijiji000111/article/details/52468042,BlogCommendHotData_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jijiji000111/article/details/52468042" target="_blank" title="iOS开发 地图：国内涉及到的地图坐标系的转换">
+				<h4 class="text-truncate oneline">
+						iOS开发 地图：国内涉及到的地图坐标系的转换				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-08</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6610</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jijiji000111/article/details/52468042" target="_blank" title="iOS开发 地图：国内涉及到的地图坐标系的转换">
+							<span class="desc oneline">一.相关的坐标系
+1）GPS以及iOS系统定位获得的坐标是地理坐标系WGS1984；
+2）Web地图一般用的坐标细是投影坐标系WGS 1984 Web Mercator；
+3）国内出于相关法律法规要求...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/jijiji000111">来自：	<span class="blog_title"> jijiji000111的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/themagickeyjianan/article/details/52386981,BlogCommendHotData_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/themagickeyjianan/article/details/52386981" target="_blank" title="python图片处理类之~PIL.Image模块(ios android icon图标自动生成处理)">
+				<h4 class="text-truncate oneline">
+						python图片处理类之~PIL.Image模块(ios android icon图标自动生成处理)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-31</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/themagickeyjianan/article/details/52386981" target="_blank" title="python图片处理类之~PIL.Image模块(ios android icon图标自动生成处理)">
+							<span class="desc oneline">1.从pyCharm提示下载PIL包
+
+ http://www.pythonware.com/products/pil/
+
+ 
+
+2.解压后，进入到目录下
+
+
+cd /Users/jianan/Dow...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/themagickeyjianan">来自：	<span class="blog_title"> 专注于cocos+unity+服务器全栈</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/BigLeo/article/details/9001560,BlogCommendHotData_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/BigLeo/article/details/9001560" target="_blank" title="再谈const: 用const 修饰函数的返回值">
+				<h4 class="text-truncate oneline">
+						再谈const: 用const 修饰函数的返回值				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-31</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/BigLeo/article/details/9001560" target="_blank" title="再谈const: 用const 修饰函数的返回值">
+							<span class="desc oneline">若函数的返回值是指针，且用const修饰，则函数返回值指向的内容是常数，不可被修改，此返回值仅能赋值给const修饰的相同类型的指针。如：
+1  const int * f1(){
+2      ...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/BigLeo">来自：	<span class="blog_title"> 教学 &amp; 技术专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/xh870189248/article/details/77985541,BlogCommendHotData_18"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xh870189248/article/details/77985541" target="_blank" title="Esp8266学习之旅① 搭建开发环境，开始一个“hellow world”串口打印。">
+				<h4 class="text-truncate oneline">
+						Esp8266学习之旅① 搭建开发环境，开始一个“hellow world”串口打印。				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xh870189248/article/details/77985541" target="_blank" title="Esp8266学习之旅① 搭建开发环境，开始一个“hellow world”串口打印。">
+							<span class="desc oneline">本系列博客学习由非官方人员 半颗心脏 潜心所力所写，仅仅做个人技术交流分享，不做任何商业用途。如有不对之处，请留言，本人及时更改。1、 Esp8266之 搭建开发环境，开始一个“hellow worl...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xh870189248">来自：	<span class="blog_title"> 徐宏的博客。</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/VBcom/article/details/6070705,BlogCommendHotData_19"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/VBcom/article/details/6070705" target="_blank" title="运行游戏时出现0xc000007b错误的解决方法">
+				<h4 class="text-truncate oneline">
+						运行游戏时出现0xc000007b错误的解决方法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-12</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							122万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/VBcom/article/details/6070705" target="_blank" title="运行游戏时出现0xc000007b错误的解决方法">
+							<span class="desc oneline">最后更新：2019-2-28
+
+    如图，0xc000007b这个错误使无数玩家烦恼。
+
+
+
+问题描述：
+
+    出现这个错误，可能是硬件的问题，也可能是软件的问题。但是，由于硬件引起该问题的概...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/VBcom">来自：	<span class="blog_title"> VBcom的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/xu__cg/article/details/53052993,BlogCommendHotData_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xu__cg/article/details/53052993" target="_blank" title="JVM学习05——内存分配与回收">
+				<h4 class="text-truncate oneline">
+						JVM学习05——内存分配与回收				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4436</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xu__cg/article/details/53052993" target="_blank" title="JVM学习05——内存分配与回收">
+							<span class="desc oneline">对象的内存分配从大方向上将，就是在堆上分配（但也可能经过JIT编译后被拆散为标量类型并间接在栈上分配），对象主要分配在新生代的Eden区上，如果启动了本地线程分配缓冲，将按线程优先在TLAB（转换后援...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xu__cg">来自：	<span class="blog_title"> 小小本科生成长之路</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/flysharkym/article/details/51404730,BlogCommendHotData_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/flysharkym/article/details/51404730" target="_blank" title="mybatis一级缓存(session cache)引发的问题">
+				<h4 class="text-truncate oneline">
+						mybatis一级缓存(session cache)引发的问题				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/flysharkym/article/details/51404730" target="_blank" title="mybatis一级缓存(session cache)引发的问题">
+							<span class="desc oneline">mybatis一级缓存(session cache)引发的问题</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/flysharkym">来自：	<span class="blog_title"> flysharkym的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/VictoriaW/article/details/77686168,BlogCommendHotData_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/VictoriaW/article/details/77686168" target="_blank" title="西瓜书《机器学习》阅读笔记1——Chapter1_假设空间">
+				<h4 class="text-truncate oneline">
+						西瓜书《机器学习》阅读笔记1——Chapter1_假设空间				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2396</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/VictoriaW/article/details/77686168" target="_blank" title="西瓜书《机器学习》阅读笔记1——Chapter1_假设空间">
+							<span class="desc oneline">现在需要判断一个西瓜是否为好瓜。假设西瓜有三个属性：色泽、根蒂、敲声。其中色泽有青绿、乌黑、浅白三种可能取值，根蒂有硬挺、稍蜷、蜷缩三种可能取值，敲声有清脆、浊响、沉闷三种可能取值。并且为每种属性考虑...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/VictoriaW">来自：	<span class="blog_title"> CodeTutor</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ymj7150697/article/details/7384126,BlogCommendHotData_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ymj7150697/article/details/7384126" target="_blank" title="expat介绍文档翻译">
+				<h4 class="text-truncate oneline">
+						expat介绍文档翻译				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-22</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ymj7150697/article/details/7384126" target="_blank" title="expat介绍文档翻译">
+							<span class="desc oneline">原文地址：http://www.xml.com/pub/a/1999/09/expat/index.html
+
+
+因为需要用，所以才翻译了这个文档。但总归赖于英语水平很有限，翻译出来的中文有可能...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ymj7150697">来自：	<span class="blog_title"> ymj7150697的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/hero_fantao/article/details/34533533,BlogCommendHotData_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hero_fantao/article/details/34533533" target="_blank" title="连续特征离散化和归一化">
+				<h4 class="text-truncate oneline">
+						连续特征离散化和归一化				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hero_fantao/article/details/34533533" target="_blank" title="连续特征离散化和归一化">
+							<span class="desc oneline">连续特征进行离散化处理。</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hero_fantao">来自：	<span class="blog_title"> hero_fantao的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Jane_yuhui/article/details/51941439,BlogCommendHotData_25"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Jane_yuhui/article/details/51941439" target="_blank" title="VTK入门（配置+常见问题）">
+				<h4 class="text-truncate oneline">
+						VTK入门（配置+常见问题）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-18</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Jane_yuhui/article/details/51941439" target="_blank" title="VTK入门（配置+常见问题）">
+							<span class="desc oneline">前言
+环境： win7 64 + visual studio 2012  +  VTK 7.0.0
+
+
+主要参考网址： 在Windows下用vs构建VTK 项目
+
+
+
+
+步骤：
+
+
+Step 1 - ...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Jane_yuhui">来自：	<span class="blog_title"> Jane_yuhui的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/gefangshuai/article/details/50328451,BlogCommendHotData_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/gefangshuai/article/details/50328451" target="_blank" title="关于SpringBoot bean无法注入的问题（与文件包位置有关）">
+				<h4 class="text-truncate oneline">
+						关于SpringBoot bean无法注入的问题（与文件包位置有关）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							17万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/gefangshuai/article/details/50328451" target="_blank" title="关于SpringBoot bean无法注入的问题（与文件包位置有关）">
+							<span class="desc oneline">问题场景描述整个项目通过Maven构建，大致结构如下：
+核心Spring框架一个module spring-boot-base
+service和dao一个module server-core
+提供系统...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/gefangshuai">来自：	<span class="blog_title"> 开发随笔</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/tq384998430/article/details/53161192,BlogCommendHotData_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/tq384998430/article/details/53161192" target="_blank" title="使用/dev/mem内存映射的方式操作GPIO口">
+				<h4 class="text-truncate oneline">
+						使用/dev/mem内存映射的方式操作GPIO口				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							8056</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/tq384998430/article/details/53161192" target="_blank" title="使用/dev/mem内存映射的方式操作GPIO口">
+							<span class="desc oneline">使用的是全志H3的芯片，运行Debian Desktop系统的ARM版本Armbian，要控制外部几个IO口，可以使用很多种方法，如果对GPIO的操作速度有要求就需要使用直接操作内存寄存器的方式来控制...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/tq384998430">来自：	<span class="blog_title"> 欢迎光临</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/jingshaohui/article/details/55190615,BlogCommendHotData_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jingshaohui/article/details/55190615" target="_blank" title="在数据库‘master’中拒绝CREATE DATABASE权限">
+				<h4 class="text-truncate oneline">
+						在数据库‘master’中拒绝CREATE DATABASE权限				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-15</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jingshaohui/article/details/55190615" target="_blank" title="在数据库‘master’中拒绝CREATE DATABASE权限">
+							<span class="desc oneline">1.通过windows身份验证方式登录
+
+2.为登录名赋予服务器角色权限，其中dbcreator权限表示允许新增和修改权限，sysadmin权限是管理员权限,包含dbcreator范围，若不追求权限精...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/jingshaohui">来自：	<span class="blog_title"> jingshaohui的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix"  data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/QiHang_QiHang/article/details/76409391,BlogCommendHotData_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/QiHang_QiHang/article/details/76409391" target="_blank" title="用邻接矩阵求无向图的连同分支数">
+				<h4 class="text-truncate oneline">
+						用邻接矩阵求无向图的连同分支数				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-31</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							374</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/QiHang_QiHang/article/details/76409391" target="_blank" title="用邻接矩阵求无向图的连同分支数">
+							<span class="desc oneline">大神：http://blog.csdn.net/esonjohn/article/details/52403185</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/QiHang_QiHang">来自：	<span class="blog_title"> QiHang的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+        <div class="recommend-item-box type_hot_word">
+            <div class="content clearfix">
+        <div class="word float-left">
+                          <span>
+            <a href="https://edu.csdn.net/course/play/2777/63744 " target="_blank">
+            CAVLC系数矩阵解析          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/combos/o363_l0_t " target="_blank">
+            设计制作学习          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+            机器学习教程          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/courses/o280_s351_k " target="_blank">
+            Objective-C培训          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/combos/o7115_s388_l0_t " target="_blank">
+            交互设计视频教程          </a></span>
+                        </div>
+      </div>
+                  <div class="content clearfix">
+        <div class="float-left">
+                  <span>
+            <a href="https://www.csdn.net/gather_1a/MtjaEg4sMDU2My1kb3dubG9hZAO0O0OO0O0O.html" target="_blank">
+            ios获取idfa</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_10/MtTaYgwsNzkyMS1kb3dubG9hZAO0O0OO0O0O.html" target="_blank">
+            server的安全控制模型是什么 sql</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_12/MtTakgxsODg1Ni1kb3dubG9hZAO0O0OO0O0O.html" target="_blank">
+            android title搜索</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_11/MtjaIgwsNzk3Ni1kb3dubG9hZAO0O0OO0O0O.html" target="_blank">
+            ios 动态修改约束</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_4a/MtTaAg5sMjMtZWR1.html" target="_blank">
+            区块链技术应用场景</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_4a/MtTaAg5sNDAtZWR1.html" target="_blank">
+            区块链应用场景开发</a>
+          </span>
+                </div>
+      </div>
+          </div>
+
+
+            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <!-- <h3 class="aside-title">个人资料</h3> -->
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/u013777351">
+                <img src="https://avatar.csdn.net/7/A/8/3_u013777351.jpg" class="avatar_pic">
+            </a>
+            
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/u013777351" target="_blank" class="" id="uid">life_爱水的鱼</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a class="btn btn-sm btn-red-hollow attention" id="btnAttent">关注</a>
+            </span>
+        </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="43">
+                        <dt><a href="https://blog.csdn.net/u013777351?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/u013777351?t=1"><span class="count">43</span></a></dd>
+                    </dl>
+        <dl class="text-center" id="fanBox" title="12">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">12</span></dd>
+        </dl>
+        <dl class="text-center" title="22">
+            <dt>喜欢</dt>
+            <dd><span class="count">22</span></dd>
+        </dl>
+        <dl class="text-center" title="5">
+            <dt>评论</dt>
+            <dd><span class="count">5</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="4级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-4"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="105614">
+                10万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="1486">
+                1486            </dd>
+        </dl>
+        <dl title="45140">
+            <dt>排名：</dt>
+            <dd>4万+</dd>
+        </dl>
+    </div>
+    </div>
+		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+      <div id="kp_box_56" data-pid="56" data-track-view='{"mod":"kp_popu_56-876","con":",,"}' data-track-click='{"mod":"kp_popu_56-876","con":",,"}'><!-- 广告位：PC-博客内页左上视窗 -->
+<script>
+(function() {
+    var s = "_" + Math.random().toString(36).slice(2);
+    document.write('<div id="' + s + '"></div>');
+    (window.slotbydup=window.slotbydup || []).push({
+        id: '6096221',
+        container: s,
+        size: '300,250',
+        display: 'inlay-fix'
+    });
+})();
+</script>
+<script src="//dup.baidustatic.com/js/os.js"></script></div>    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u013777351/article/details/51001867" target="_blank">从一堆（大量的）无序不重复数组成的数组中寻找一指定数出现的位置</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u013777351/article/details/50807515" target="_blank">OpenCV中遍历图像与邻域操作</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u013777351/article/details/50793525" target="_blank">OpenCV 三种图像遍历方法</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u013777351/article/details/50776475" target="_blank">Mat简介 1</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u013777351/article/details/50763277" target="_blank">OpenCV对鼠标事件的处理</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/2517543">
+                    <span class="title oneline">配置</span>
+                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5704317">
+                    <span class="title oneline">STL学习</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5778033">
+                    <span class="title oneline">Qt基础</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5781853">
+                    <span class="title oneline">理解C++</span>
+                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5785395">
+                    <span class="title oneline">LeetCode and Algorithm</span>
+                    <span class="count float-right">18篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5787813">
+                    <span class="title oneline">SQL语句总结</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5795233">
+                    <span class="title oneline">计算机网络</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5801099">
+                    <span class="title oneline">软件工程感想与总结</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5801101">
+                    <span class="title oneline">设计模式学习</span>
+                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5818257">
+                    <span class="title oneline">Java</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5818263">
+                    <span class="title oneline">Python</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5818295">
+                    <span class="title oneline">操作系统</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5821093">
+                    <span class="title oneline">面试杂谈</span>
+                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/5854379">
+                    <span class="title oneline">Linux编程</span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/6060633">
+                    <span class="title oneline">MySQL学习</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/6106273">
+                    <span class="title oneline">Redis</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/u013777351/article/category/6111511">
+                    <span class="title oneline">OpenCV学习笔记</span>
+                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u013777351/article/month/2016/03">
+                    2016年3月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u013777351/article/month/2016/02">
+                    2016年2月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u013777351/article/month/2016/01">
+                    2016年1月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u013777351/article/month/2015/10">
+                    2015年10月                    <span class="count float-right">13篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u013777351/article/month/2015/09">
+                    2015年9月                    <span class="count float-right">41篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u013777351/article/month/2015/08">
+                    2015年8月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/u013777351/article/month/2014/08">
+                    2014年8月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/u013777351/article/details/49226101">传输层TCP和UDP的区别分析与应用场景【转载】</a>
+					<p class="read">阅读数 <span>17659</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u013777351/article/details/50733974">Windows下boost安装及其在VS2013中配置</a>
+					<p class="read">阅读数 <span>12466</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u013777351/article/details/48310655">看懂UML类图和时序图【转载】</a>
+					<p class="read">阅读数 <span>6722</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u013777351/article/details/50557260">Linux硬链接和软链接（符号链接）</a>
+					<p class="read">阅读数 <span>6163</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/u013777351/article/details/50762679">从摄像头或视频文件中读取视频流并显示</a>
+					<p class="read">阅读数 <span>6153</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u013777351/article/details/49226101#comments">传输层TCP和UDP的区别分析与应...</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/bisubisu" class="user-name" target="_blank">bisubisu：</a>非常不错，值得学习                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u013777351/article/details/48153609#comments">当无符号数与有符号数一起玩耍时</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/xsw104205" class="user-name" target="_blank">xsw104205：</a>举个例子：a=-12,b=6;
+分别用方法一、方法二判断。方法一会走溢出分支，方法二会走return a+b分支。所以我不太明白，方法一为啥是正确的判断溢出的方法？                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u013777351/article/details/48310655#comments">看懂UML类图和时序图【转载】</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/m18633778874" class="user-name" target="_blank">m18633778874：</a>很详细的博文，谢谢博主的分享。                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u013777351/article/details/50733974#comments">Windows下boost安装及其...</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/u012339743" class="user-name" target="_blank">u012339743：</a>已拜读。配置成功！
+lib32-msvc-12.0 请问这个是什么？boost目录下并没有这个~                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/u013777351/article/details/49226101#comments">传输层TCP和UDP的区别分析与应...</a>
+                <p class="comment ellipsis">
+                    <a href="https://my.csdn.net/aa841538513" class="user-name" target="_blank">aa841538513：</a>写的很好，赞一个                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+			<div id="kp_box_57" data-pid="57" data-track-view='{"mod":"kp_popu_57-707","con":",,"}' data-track-click='{"mod":"kp_popu_57-707","con":",,"}'><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 博客内页左下视窗-20181130 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-1076724771190722"
+     data-ad-slot="1894159733"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>		</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">
+            <div id="dmp_ad_69"><div id="kp_box_69" data-pid="69" data-track-view='{"mod":"kp_popu_69-796","con":",,"}' data-track-click='{"mod":"kp_popu_69-796","con":",,"}'><div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://edu.csdn.net/topic/python115?utm_source=ditong" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">Python全面学习指南</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #00BFFF;padding:2px 5px 0px 5px;background:#FFF0F5;">
+<a href="https://edu.csdn.net/topic/ai30?utm_source=ditong" target="_blank" style="color:#00BFFF;font-weight:bold;text-decoration:none;font-size:15px;">转型AI人工智能指南</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://edu.csdn.net/topic/ai30?utm_source=ditong" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">BAT的AI岗要求</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #00BFFF;padding:2px 5px 0px 5px;background:#FFF0F5;">
+<a href="https://gitbook.cn/gitchat/column/5ca950658a314a3fd950b67d?utm_source=wzl190409" target="_blank" style="color:#00BFFF;font-weight:bold;text-decoration:none;font-size:15px;">15天共读深度学习</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://edu.csdn.net/topic/blockchain10?utm_source=ditong" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">区块链寒冬了吗？</a>
+</div>
+
+
+<div style="float:left;">
+<script type="text/javascript" src="//rabc1.iteye.com/common/js/ndr3h.js?b=wosyvccl"></script>
+<!-- 长文字链
+<script type="text/javascript" src="//rabc1.iteye.com/common/5klj5.js?kfxbghx=bx"></script>
+-->
+</div></div></div>            		</span>
+		<div class="pulllog-btn float-right clearfix">
+            <div class="float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                <a class="pulllog-login">登录</a>
+            </div>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li class="btn-like-box long-width">
+			<button class=" long-height hover-box btn-like " title="点赞">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<span class="hover-show text-box text">
+					<span class="no-active">点赞</span>
+					<span class="active">取消点赞</span>
+				</span>
+				<p>15</p>
+			</button>
+		</li>
+		<li class="">
+						<a class="btn-comments long-height hover-box" title="写评论" href="#commentBox">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg>
+				<span class="hover-show text">评论</span>
+				<p class="">
+						2				</p>
+			</a>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc low-height hover-box" title="目录">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg>
+				<span class="hover-show text">目录</span>
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark low-height hover-box" title="收藏">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg>
+					<span class="hover-show text">收藏</span>
+				<!-- <span class="hover-show text-box text">
+					<span class="no-active">收藏</span>
+					<span class="active">取消收藏</span>
+				</span> -->
+			</button>
+		</li>
+		<li class="bdsharebuttonbox">
+			<div class="weixin-qr btn-comments low-height hover-box" >
+        <a href="#" class="bds_weixin clear-share-style" data-cmd="weixin" title="手机看"></a>
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-usephone"></use>
+				</svg>
+				<span class="hover-show text text3">
+					手机看
+				</span>
+			</div>
+		</li>
+							<li class="widescreen-hide">
+				<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/u013777351/article/details/49131247" title="DDL,DML">
+					<svg class="icon hover-hide" aria-hidden="true">
+						<use xlink:href="#csdnc-chevronleft"></use>
+					</svg>
+					<span class="hover-show text text3">上一篇</span>
+				</a>
+			</li>
+								<li class="widescreen-hide">
+			<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/u013777351/article/details/49226209" title="C++设计模式--享元模式【转载】">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-chevronright"></use>
+				</svg>
+				<span class="hover-show text text3">下一篇</span>
+			</a>
+		</li>
+						<!-- 宽屏更多按钮 -->
+		<li class="widescreen-more">
+			<a class="btn-comments chat-ask-button low-height hover-box" title="快问" href="#chatqa">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-more"></use>
+				</svg>
+				<span class="hover-show text">更多</span>
+				
+			</a>
+			<ul class="widescreen-more-box">
+													<li class="widescreen-more">
+						<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/u013777351/article/details/49131247" title="DDL,DML">
+							<svg class="icon hover-hide" aria-hidden="true">
+								<use xlink:href="#csdnc-chevronleft"></use>
+							</svg>
+							<span class="hover-show text text3">上一篇</span>
+						</a>
+					</li>
+																<li class="widescreen-more">
+					<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/u013777351/article/details/49226209" title="C++设计模式--享元模式【转载】">
+						<svg class="icon hover-hide" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronright"></use>
+						</svg>
+						<span class="hover-show text text3">下一篇</span>
+					</a>
+				</li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 80;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = articleTitles;
+    var ChannelId = 7;
+    var articleId = "49226101";
+    var commentscount = 2;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/u013777351/article/details/49226101";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "传输层TCP和UDP的区别分析与应用场景【转载】 - 小鱼的专栏";
+    var needInsertBaidu = true;
+    // 代码段样式
+    var codeStyle = '';
+		var highlight = ["\u4f20\u8f93\u5c42","tcp","udp","\u533a\u522b","\u5206\u6790","\u5e94\u7528\u573a\u666f","\u8f6c\u8f7d"];//高亮数组
+		// 相关推荐博主数据
+    var RecommendBlogExpertList = [{"user_name":"xu1105775448","nick_name":"Nicole  xu","avatar":"https:\/\/avatar.csdn.net\/E\/C\/C\/3_xu1105775448.jpg","is_expert":false,"article_count":60,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"dangzhangjing97","nick_name":"dangzhangjing97","avatar":"https:\/\/avatar.csdn.net\/7\/2\/6\/3_dangzhangjing97.jpg","is_expert":false,"article_count":148,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"sweetgum2012","nick_name":"sweetgum2012","avatar":"https:\/\/avatar.csdn.net\/F\/4\/5\/3_sweetgum2012.jpg","is_expert":false,"article_count":25,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"u011730649","nick_name":"zyxNobita","avatar":"https:\/\/avatar.csdn.net\/8\/8\/0\/3_u011730649.jpg","is_expert":false,"article_count":331,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"weixin_40099554","nick_name":"\u674e\u4fca\u6807","avatar":"https:\/\/avatar.csdn.net\/C\/F\/B\/3_weixin_40099554.jpg","is_expert":false,"article_count":111,"rank":"9000+"},{"user_name":"ruhailiu126","nick_name":"\u8427\u522b\u79bb","avatar":"https:\/\/avatar.csdn.net\/2\/8\/1\/3_ruhailiu126.jpg","is_expert":false,"article_count":15,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"weixin_40417029","nick_name":"wwxjya","avatar":"https:\/\/avatar.csdn.net\/D\/9\/4\/3_weixin_40417029.jpg","is_expert":false,"article_count":83,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"amazingrace","nick_name":"amazingrace","avatar":"https:\/\/avatar.csdn.net\/A\/9\/7\/3_amazingrace.jpg","is_expert":false,"article_count":43,"rank":"\u5343\u91cc\u4e4b\u5916"},{"user_name":"ght886","nick_name":"Kevin's life","avatar":"https:\/\/avatar.csdn.net\/6\/6\/A\/3_ght886.jpg","is_expert":false,"article_count":237,"rank":"1000+"},{"user_name":"sinat_38992528","nick_name":"LinDaiuuj","avatar":"https:\/\/avatar.csdn.net\/4\/9\/4\/3_sinat_38992528.jpg","is_expert":false,"article_count":313,"rank":"\u5343\u91cc\u4e4b\u5916"}];
+	var articleType = 2;
+	var CopyrightContent = '本文为博主原创文章，如若需要转载请注明原创地址，谢谢。';
+    var current_user_name = '';
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201811201455'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,articleTit);
+        }
+    })
+</script>
+</body>
+
+<!-- 高亮未与 markdown兼容  -->
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.8/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">
+	<script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/pc_wap_common-3bc59f8f2b.js" /></script>
+	
+	<!-- <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/markdownCopy-5c7fa7386e.js" /></script> -->
+
+
+<script src="//g.csdnimg.cn/??login-box/1.0.5/login-box.js,login-box/1.0.5/login-auto.js?t=20190307095522"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-cca3af63ea.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-8dd11249c5.min.js"></script>
+
+	<script src="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-fc7383b956.min.js"></script>
+
+<script src="//g.csdnimg.cn/baidu-search/1.0.0/baidu-search.js"  type="text/javascript"></script>
+
+
+<!-- <script type="text/javascript" src="//g.csdnimg.cn/check-adb/1.0.2/check-adb.js"></script> -->
+
+<script type="text/javascript" src="https://csdnimg.cn/release/blog_mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+<script type="text/javascript">
+    </script>
+<script src="https://gh.bdstatic.com/static/gh/js/sdk/bword.min.js"></script>
+</html>
